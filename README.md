@@ -5,6 +5,14 @@ Text slot machine for react-native is an easy and fully customizable Slot Machin
     <img src="https://cloud.githubusercontent.com/assets/3952700/22622958/12e1d046-eb53-11e6-913f-a1b234485136.gif" height="640px" />
 </p>
 
+## Usage
+
+```jsx
+<View>
+    <SlotMachine text={1234} />
+    <SlotMachine text="hello" range="abcdefghijklmnopqrstuvwxyz" />
+</View>
+```
 ## Props
 The following props can be used to modify the slot machine's style and/or behaviour:
 
