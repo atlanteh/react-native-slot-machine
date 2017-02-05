@@ -62,7 +62,7 @@ export default class SlotMachine extends Component {
             padding: 4,
             duration: 2000,
             delay: 0,
-            stopDelay: 500,
+            slotInterval: 500,
             defaultChar: '0',
             range: '9876543210',
             initialAnimation: true,
@@ -183,11 +183,11 @@ export default class SlotMachine extends Component {
 
     startInitialAnimation() {
         const {values} = this.state;
-        const {duration, stopDelay} = this.props;
+        const {duration, slotInterval} = this.props;
         const easing = Easing.inOut(Easing.ease);
 
         const animations = values.map((value, i) => {
-            const animationDuration = duration - (values.length - 1 - i) * stopDelay;
+            const animationDuration = duration - (values.length - 1 - i) * slotInterval;
             return Animated.timing(value, {toValue: 0, duration: animationDuration, easing});
         });
 
