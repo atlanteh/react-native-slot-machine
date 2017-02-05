@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, Animated, Easing} from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        overflow: 'hidden',
     },
     slotWrapper: {
         backgroundColor: 'gray',
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
         padding: 2,
     },
     text: {
-        fontSize: 55,
+        fontSize: 50,
         top: -2,
         fontWeight: 'bold',
         color: '#b5b7ba',
