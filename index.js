@@ -223,7 +223,7 @@ export default class SlotMachine extends Component {
         });
 
         return (
-            <View style={[styles.slotWrapper, {height, width}, overrideStyles.slotWrapper]}>
+            <View key={position} style={[styles.slotWrapper, {height, width}, overrideStyles.slotWrapper]}>
                 {slots}
                 <View style={[styles.innerBorder, overrideStyles.innerBorder]} />
                 <View style={[styles.outerBorder, overrideStyles.outerBorder]} />
