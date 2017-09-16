@@ -99,7 +99,7 @@ export default class SlotMachine extends Component {
             return;
         }
 
-        const {range} = newProps;
+        const {range, duration} = newProps;
         const easing = Easing.inOut(Easing.ease);
         const paddedStr = this.getPaddedString(newProps);
         const newValues = this.getAdjustedAnimationValues(newProps);
@@ -108,7 +108,7 @@ export default class SlotMachine extends Component {
             const newAnimations = paddedStr.split('').map((char, i) => {
                 const index = range.indexOf(char);
                 const animationValue = -1 * (index) * newProps.height;
-                return Animated.timing(this.state.values[i], {toValue: animationValue, duration: 1000, easing});
+                return Animated.timing(this.state.values[i], {toValue: animationValue, duration, easing});
             });
             Animated.parallel(newAnimations).start();
         });
