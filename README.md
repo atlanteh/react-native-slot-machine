@@ -42,7 +42,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        SplashScreen.close({animationType: SplashScreen.animationType.scale, duration: 1000, delay: 500});
         setTimeout(() => this.setState({duration: 1000, slot1: '4321', slot2: 'world', slot3: '1234'}), 5000);
         setTimeout(() => this.setState({duration: 4000, slot1: '1234', slot2: 'hello', slot3: '2351'}), 7000);
     }
