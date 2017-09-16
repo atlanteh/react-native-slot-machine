@@ -66,7 +66,8 @@ export default class SlotMachine extends Component {
             defaultChar: '0',
             range: '9876543210',
             initialAnimation: true,
-            styles: {}
+            styles: {},
+            renderTextContent: (currentChar) => currentChar,
         };
     }
 
@@ -74,6 +75,7 @@ export default class SlotMachine extends Component {
         super(props);
         this.renderSlot = this.renderSlot.bind(this);
         this.startInitialAnimation = this.startInitialAnimation.bind(this);
+        this.renderContent = this.renderContent.bind(this);
 
         let values;
         if (props.initialAnimation) {
@@ -200,8 +202,14 @@ export default class SlotMachine extends Component {
         this.setState({initialAnimation: true});
     }
 
+    renderContent(currentChar, i, range) {
+        const {styles: overrideStyles, renderTextContent} = this.props;        
+        const textContent = renderTextContent(currentChar, i, range);
+        return (<Text style={[styles.text, overrideStyles.text]}>{textContent}</Text>);
+    }
+
     renderSlot(charToShow, position) {
-        const {range, styles: overrideStyles, height, width} = this.props;
+        const {range, styles: overrideStyles, height, width, renderContent = this.renderContent} = this.props;
         const {initialAnimation, values} = this.state;
         const charToShowIndex = range.indexOf(charToShow);
 
@@ -211,13 +219,14 @@ export default class SlotMachine extends Component {
                 const currentIndex = (i + charToShowIndex) % range.length;
                 currentChar = range[currentIndex];
             }
-
+            
+            const content = renderContent(currentChar, i, range);
             return (
                 <Animated.View
                     key={i}
                     style={[styles.slotInner, {height}, overrideStyles.slotInner, {top: values[position]}]}
                 >
-                    <Text style={[styles.text, overrideStyles.text]}>{currentChar}</Text>
+                    {content}
                 </Animated.View>
             );
         });
