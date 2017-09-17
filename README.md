@@ -46,7 +46,7 @@ class App extends React.Component {
         setTimeout(() => this.setState({duration: 4000, slot1: '1234', slot2: 'hello', slot3: '2351'}), 7000);
     }
     render() {
-        const symbols = ['🍏', '🍎', '🍐', '🍊', '🍋', '🍌'];
+        const symbols = ['🍏', '🍎', '🍐', '🍊', '🍋', '🍌']; // can't use emojies in SlotMachine because some of them are comprised of 2 chars
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <View style={{height: 200, justifyContent: 'space-between', alignItems: 'center'}}>
