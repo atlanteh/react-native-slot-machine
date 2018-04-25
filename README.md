@@ -32,6 +32,12 @@ The following props can be used to modify the slot machine's style and/or behavi
 |__`renderContent`__|_Function_|Optional|`(char, index, range) => char`|Allows replacing the entire Text element with your own implementation
 |__`styles`__|_Object_|Optional|`{}`|Allows overriding each of the inner components (container, slotWrapper, slotInner, innerBorder, outerBorder, overlay, text)
 
+## Methods
+#### `spinTo(text)`
+Spins the slot machine from current position to the specified text position.
+
+<br />
+
 ## Advanced Example
 
 ```
@@ -44,6 +50,7 @@ class App extends React.Component {
     componentDidMount() {
         setTimeout(() => this.setState({duration: 1000, slot1: '4321', slot2: 'world', slot3: '1234'}), 5000);
         setTimeout(() => this.setState({duration: 4000, slot1: '1234', slot2: 'hello', slot3: '2351'}), 7000);
+        setTimeout(() => this.refs.slot.spinTo('prize'), 12000);
     }
     render() {
         const symbols = ['🍏', '🍎', '🍐', '🍊', '🍋', '🍌']; // can't use emojies in SlotMachine because some of them are comprised of 2 chars
@@ -51,7 +58,12 @@ class App extends React.Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <View style={{height: 200, justifyContent: 'space-between', alignItems: 'center'}}>
                     <SlotMachine text={this.state.slot1} duration={this.state.duration} />
-                    <SlotMachine text={this.state.slot2} range="abcdefghijklmnopqrstuvwxyz" width={45} duration={this.state.duration} />
+                    <SlotMachine
+                        text={this.state.slot2}
+                        range="abcdefghijklmnopqrstuvwxyz"
+                        width={45} duration={this.state.duration}
+                        ref="slot"
+                    />
                     <SlotMachine text={this.state.slot3} range="012345" renderContent={c => <Text style={{fontSize: 25}}>{symbols[c]}</Text>} duration={this.state.duration} />
                 </View>
             </View>

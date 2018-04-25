@@ -77,6 +77,7 @@ export default class SlotMachine extends Component {
         this.startInitialAnimation = this.startInitialAnimation.bind(this);
         this.renderContent = this.renderContent.bind(this);
 
+        this.text = props.text;
         let values;
         if (props.initialAnimation) {
             values = this.getInitialSlotsValues(props);
@@ -95,10 +96,10 @@ export default class SlotMachine extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.text === this.props.text) {
+        if (newProps.text === this.text) {
             return;
         }
-
+        this.text = newProps.text;
         const {range, duration} = newProps;
         const easing = Easing.inOut(Easing.ease);
         const paddedStr = this.getPaddedString(newProps);
@@ -154,7 +155,7 @@ export default class SlotMachine extends Component {
 
     getInitialSlotsValues(props) {
         const values = [];
-        const strNum = String(props.text);
+        const strNum = String(this.text);
         const animationValue = this.getPosition(props.range.length - 1, props);
 
         let slotCount = Math.max(props.padding, strNum.length);
@@ -166,9 +167,9 @@ export default class SlotMachine extends Component {
     }
 
     getPaddedString(props = this.props) {
-        const {text, padding, defaultChar} = props;
+        const {padding, defaultChar} = props;
 
-        let paddedText = String(text);
+        let paddedText = String(this.text);
         let neededPadding = Math.max(0, padding - paddedText.length);
         while ((neededPadding--) > 0) {
             paddedText = `${defaultChar}${paddedText}`;
@@ -200,6 +201,12 @@ export default class SlotMachine extends Component {
         });
 
         this.setState({initialAnimation: true});
+    }
+
+    spinTo(value) {
+        this.text = value;
+        const values = this.getInitialSlotsValues(this.props);
+        this.setState({values}, () => this.startInitialAnimation());
     }
 
     renderContent(currentChar, i, range) {
