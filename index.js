@@ -68,6 +68,7 @@ export default class SlotMachine extends Component {
             initialAnimation: true,
             styles: {},
             renderTextContent: (currentChar) => currentChar,
+			useNativeDriver: false,
         };
     }
 
@@ -109,7 +110,7 @@ export default class SlotMachine extends Component {
             const newAnimations = paddedStr.split('').map((char, i) => {
                 const index = range.indexOf(char);
                 const animationValue = -1 * (index) * newProps.height;
-                return Animated.timing(this.state.values[i], {toValue: animationValue, duration, easing});
+                return Animated.timing(this.state.values[i], {toValue: animationValue, duration, easing, useNativeDriver: this.props.useNativeDriver});
             });
             Animated.parallel(newAnimations).start();
         });
@@ -191,7 +192,7 @@ export default class SlotMachine extends Component {
 
         const animations = values.map((value, i) => {
             const animationDuration = duration - (values.length - 1 - i) * slotInterval;
-            return Animated.timing(value, {toValue: 0, duration: animationDuration, easing});
+            return Animated.timing(value, {toValue: 0, duration: animationDuration, easing, useNativeDriver: this.props.useNativeDriver});
         });
 
         Animated.parallel(animations).start(() => {
