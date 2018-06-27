@@ -68,7 +68,7 @@ export default class SlotMachine extends Component {
             initialAnimation: true,
             styles: {},
             renderTextContent: (currentChar) => currentChar,
-			useNativeDriver: false,
+	    useNativeDriver: true,
         };
     }
 
@@ -232,7 +232,7 @@ export default class SlotMachine extends Component {
             return (
                 <Animated.View
                     key={i}
-                    style={[styles.slotInner, {height}, overrideStyles.slotInner, {top: values[position]}]}
+                    style={[styles.slotInner, {height}, overrideStyles.slotInner, {transform: [{translateY: values[position]}]} ]}
                 >
                     {content}
                 </Animated.View>
