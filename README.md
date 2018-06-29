@@ -31,7 +31,7 @@ The following props can be used to modify the slot machine's style and/or behavi
 |__`renderTextContent`__|_Function_|Optional|`(char, index, range) => char`|Allows replacing the inner content of the Text element
 |__`renderContent`__|_Function_|Optional|`(char, index, range) => char`|Allows replacing the entire Text element with your own implementation
 |__`styles`__|_Object_|Optional|`{}`|Allows overriding each of the inner components (container, slotWrapper, slotInner, innerBorder, outerBorder, overlay, text)
-|__`useNativeDriver`__|_Boolean_|Optional|`true`|Enable use of NativeDriver on Animation. See https://facebook.github.io/react-native/docs/animations.html#using-the-native-driver
+|__`useNativeDriver`__|_Boolean_|Optional|`false`|Enable use of NativeDriver on Animation. See https://facebook.github.io/react-native/docs/animations.html#using-the-native-driver
 
 ## Methods
 #### `spinTo(text)`

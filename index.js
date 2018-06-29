@@ -68,7 +68,7 @@ export default class SlotMachine extends Component {
             initialAnimation: true,
             styles: {},
             renderTextContent: (currentChar) => currentChar,
-	    useNativeDriver: true,
+	        useNativeDriver: false,
         };
     }
 
@@ -101,7 +101,7 @@ export default class SlotMachine extends Component {
             return;
         }
         this.text = newProps.text;
-        const {range, duration} = newProps;
+        const {range, duration, useNativeDriver} = newProps;
         const easing = Easing.inOut(Easing.ease);
         const paddedStr = this.getPaddedString(newProps);
         const newValues = this.getAdjustedAnimationValues(newProps);
@@ -110,7 +110,7 @@ export default class SlotMachine extends Component {
             const newAnimations = paddedStr.split('').map((char, i) => {
                 const index = range.indexOf(char);
                 const animationValue = -1 * (index) * newProps.height;
-                return Animated.timing(this.state.values[i], {toValue: animationValue, duration, easing, useNativeDriver: this.props.useNativeDriver});
+                return Animated.timing(this.state.values[i], {toValue: animationValue, duration, easing, useNativeDriver: useNativeDriver});
             });
             Animated.parallel(newAnimations).start();
         });
@@ -187,12 +187,12 @@ export default class SlotMachine extends Component {
 
     startInitialAnimation() {
         const {values} = this.state;
-        const {duration, slotInterval} = this.props;
+        const {duration, slotInterval, useNativeDriver} = this.props;
         const easing = Easing.inOut(Easing.ease);
 
         const animations = values.map((value, i) => {
             const animationDuration = duration - (values.length - 1 - i) * slotInterval;
-            return Animated.timing(value, {toValue: 0, duration: animationDuration, easing, useNativeDriver: this.props.useNativeDriver});
+            return Animated.timing(value, {toValue: 0, duration: animationDuration, easing, useNativeDriver: useNativeDriver});
         });
 
         Animated.parallel(animations).start(() => {
