@@ -68,7 +68,7 @@ export default class SlotMachine extends Component {
             initialAnimation: true,
             styles: {},
             renderTextContent: (currentChar) => currentChar,
-	        useNativeDriver: false,
+            useNativeDriver: false,
         };
     }
 
