@@ -96,20 +96,20 @@ export default class SlotMachine extends Component {
         setTimeout(this.startInitialAnimation, delay);
     }
 
-    componentWillReceiveProps(newProps) {
-        if (newProps.text === this.text) {
-            return;
+    componentDidUpdate(prevProps) {
+        if (prevProps.text === this.props.text) {
+          return;
         }
-        this.text = newProps.text;
-        const {range, duration, useNativeDriver} = newProps;
+        this.text = this.props.text;
+        const {range, duration, useNativeDriver} = this.props;
         const easing = Easing.inOut(Easing.ease);
-        const paddedStr = this.getPaddedString(newProps);
-        const newValues = this.getAdjustedAnimationValues(newProps);
+        const paddedStr = this.getPaddedString(this.props);
+        const newValues = this.getAdjustedAnimationValues(this.props);
 
         this.setState({values: newValues}, () => {
             const newAnimations = paddedStr.split('').map((char, i) => {
                 const index = range.indexOf(char);
-                const animationValue = -1 * (index) * newProps.height;
+                const animationValue = -1 * index * this.props.height;
                 return Animated.timing(this.state.values[i], {toValue: animationValue, duration, easing, useNativeDriver: useNativeDriver});
             });
             Animated.parallel(newAnimations).start();

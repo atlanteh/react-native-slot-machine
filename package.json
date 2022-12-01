@@ -1,6 +1,6 @@
 {
   "name": "react-native-slot-machine",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "A slot machine component for React Native",
   "main": "index.js",
   "scripts": {
